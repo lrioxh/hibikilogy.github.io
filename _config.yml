@@ -5,9 +5,9 @@ header-img: https://i.loli.net/2020/03/13/Kk83Nb1DUaYOi6j.png
 email: 
 description: 吹学著作集锦
 keyword: 吹学
-url: "http://hibikilogy.github.io"          # your host, for absolute URL
-baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "https://github.com/hibikilogy/hibikilogy.github.io.git" # you code repository
+url: "https://lrioxh.github.io"          # your host, for absolute URL
+baseurl: "/hibikilogy.github.io"      # for example, '/blog' if your blog hosted on 'host/blog'
+github_repo: "https://github.com/lrioxh/hibikilogy.github.io.git" # you code repository
 
 # Sidebar settings
 sidebar: false                           # whether or not using Sidebar.
