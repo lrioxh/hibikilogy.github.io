@@ -2,13 +2,15 @@
 title: 站内搜索
 layout: page
 ---
-<form action="https://www.bing.com/search" method="get">
-    <input type="text" name="q" class="form-control" maxlength="255" placeholder="在 bing 搜索">
-    <input type="hidden" name="q1" value="site:hibikilogy.github.io">
-    <!-- <input type="submit" value="搜索"> -->
+<form role="search" onsubmit="return RedirectToSearvh()">
+    <div class="form-group">
+        <input type="text" class="form-control" id="searchInput" placeholder="通过 SimpleJekyllSearch 搜索">
+    </div>
 </form>
+<ul class="list-group" id="searchResults" ></ul>
+
 <form onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
-    <p><input type="text" class="form-control" id="lunrsearch" maxlength="255" value="" placeholder="通过 Lunr.js 站内搜索" /></p>
+    <p><input type="text" class="form-control" id="lunrsearch" maxlength="255" value="" placeholder="通过 Lunr.js 搜索" /></p>
 </form>
 
 <div class="container">
@@ -26,8 +28,18 @@ layout: page
 <script src="{{site.baseurl}}/js/lunr.min.js"></script>
 <script src="{{site.baseurl}}/js/lunr.stemmer.support.js"></script>
 <script src="{{site.baseurl}}/js/lunr.zh.js"></script> <!-- or any other language you want -->
-
+<script src="{{site.baseurl}}/js/simple-jekyll-search.min.js"></script>
 <script>
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('searchInput'),
+        resultsContainer: document.getElementById('searchResults'),
+        json: '{{site.baseurl}}/search.json',
+        searchResultTemplate: '<li class="list-group-item"><a href="{url}"><h5>{title}</h5><p class="paragraph">{date}-{tags}</p></a></li>',
+        noResultsText: '<p class="paragraph">没有搜索到文章</p>',
+        limit: 7,
+        fuzzy: true
+      })
+
 {% assign counter = 0 %}
 var docs = [
     {% for post in site.posts %}{
@@ -82,5 +94,16 @@ function lunr_search(term) {
     }
     return false;
 }
-
 </script>
+
+<style>
+    .paragraph {
+        margin: 0;
+        width: 90%;;
+        height: auto;
+        font-size: smaller;
+        white-space: nowrap; 
+        overflow: hidden;  /* 隐藏溢出的文本 */
+        text-overflow: ellipsis;  /* 使用省略号表示溢出的文本 */
+    }
+</style>
