@@ -71,8 +71,8 @@ function lunr_search(term) {
     document.getElementById('lunrsearchresults').innerHTML = '<div></div>';
     if(term) {
         //put results on the screen.
-        var results = idx.search(term);
-        console.log(term, results);
+        var results = idx.search(term.replace(/([\u4E00-\u9FA5])/g, '$1 ')+term);
+        //console.log(addSpaceAfterChineseChar(term), results);
         if(results.length>0){
             //console.log(results[0]);
             for (var i = 0; i < results.length; i++) {
