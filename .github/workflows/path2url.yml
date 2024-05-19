@@ -19,7 +19,7 @@ jobs:
     - name: Get list of changed files(ALL)
       id: get-changed-files-all
       run: |
-        CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '_post/*.md' || true)
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '_posts/*.md' || true)
         echo "Changed .md files: $CHANGED_FILES"
         echo "changed_files=$CHANGED_FILES">> $GITHUB_OUTPUT
 
