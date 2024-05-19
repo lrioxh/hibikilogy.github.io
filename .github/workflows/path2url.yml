@@ -27,7 +27,10 @@ jobs:
         echo "Changed files: $GIT_DIFF"
         CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }}| tr -d '"' | grep '_posts/.*\.md' || true)
         echo "Changed .md files: $CHANGED_FILES"
-        echo "changed_files=$CHANGED_FILES">> $GITHUB_OUTPUT
+        EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+        echo "changed_files<<$EOF" >> $GITHUB_OUTPUT
+        echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+        echo "$EOF" >> $GITHUB_OUTPUT
 
     # - name: Get list of changed files(ONLY_path2url)
     #   id: get-changed-files-path2url
