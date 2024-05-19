@@ -68,7 +68,7 @@ jobs:
         CHANGED_FILES="${{ steps.get-changed-files-all.outputs.changed_files }}"
         for FILE in $CHANGED_FILES; do
           if [ -f "$FILE" ]; then
-            sed -i 's|\.\./images/|/images/|g' "$FILE"
+            sed -i 's|\.\./images/|https://hibikilogy.github.io/images/|g' "$FILE"  # or {{site.url}}
           fi
         done
         # 检查是否有改动
