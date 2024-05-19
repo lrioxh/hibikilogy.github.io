@@ -23,9 +23,9 @@ jobs:
       run: |
         BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
         echo "Current branch: $BRANCH_NAME"
-        GIT_DIFF=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        GIT_DIFF=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }}| tr -d '"')
         echo "Changed files: $GIT_DIFF"
-        CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '_posts/.*\.md' || true)
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }}| tr -d '"' | grep '_posts/.*\.md' || true)
         echo "Changed .md files: $CHANGED_FILES"
         echo "changed_files=$CHANGED_FILES">> $GITHUB_OUTPUT
 
